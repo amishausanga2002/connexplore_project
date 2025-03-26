@@ -79,9 +79,14 @@
 
             <input type="text" name="cb_number" placeholder="CB Number" class="form-control block w-full px-4 py-3 mb-2 border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50" required>
 
-            <input type="date" name="incident_date" class="form-control block w-full px-4 py-3 mb-2 border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50" required>
-            <input type="time" name="incident_time" class="form-control block w-full px-4 py-3 mb-2 border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50" required>
-            <input type="date" name="reported_on" class="form-control block w-full px-4 py-3 mb-2 border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50" required>
+            <label for="incident_date" class="block text-gray-700 font-bold mb-2">Incident Date</label>
+            <input type="date" id="incident_date" name="incident_date" class="form-control block w-full px-4 py-3 mb-2 border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50" required>
+
+            <label for="incident_time" class="block text-gray-700 font-bold mb-2">Time slot</label>
+            <input type="time" id="incident_time" name="incident_time" class="form-control block w-full px-4 py-3 mb-2 border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50" required>
+
+            <label for="reported_on" class="block text-gray-700 font-bold mb-2">Reported On</label>
+            <input type="date" id="reported_on" name="reported_on" class="form-control block w-full px-4 py-3 mb-2 border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50" required>
 
             <input type="text" name="location" placeholder="Location" class="form-control block w-full px-4 py-3 mb-2 border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50" required>
             <input type="text" name="sport_name" placeholder="Sport Name" class="form-control block w-full px-4 py-3 mb-2 border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50" required>

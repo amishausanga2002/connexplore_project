@@ -18,7 +18,7 @@ class Booking extends Model
         'equipment_id',
         'equipment_name',
         'location_id',
-        'location_branch',
+        'location_name',
         'date',
         'time_slot'
     ];

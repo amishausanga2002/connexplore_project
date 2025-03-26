@@ -97,7 +97,7 @@
                                 <td class="px-4 py-2">{{ $booking->cbnumber }}</td>
                                 <td class="px-4 py-2">{{ $booking->sport_name }}</td>
                                 <td class="px-4 py-2">{{ $booking->equipment_name }}</td>
-                                <td class="px-4 py-2">{{ $booking->location_branch }}</td>
+                                <td class="px-4 py-2">{{ $booking->location_name }}</td>
                                 <td class="px-4 py-2">{{ $booking->date }}</td>
                                 <td class="px-4 py-2">{{ $booking->time_slot }}</td>
                             </tr>
@@ -107,6 +107,11 @@
             </div>
         @endif
     </div>
+
+    <div class="text-center mt-4">
+        <a href="{{ route('dashboard') }}" class="btn btn-primary">Go to Dashboard</a>
+    </div>
+
 
 </body>
 <br><br><br><br><br><br><br><br>

@@ -41,53 +41,52 @@ class BookingController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
-        $request->validate([
-            'cbnumber' => 'required|string|max:255',
-            'sport_id' => 'required|exists:sports,id',
-            'equipment_id' => 'required|exists:equipment,id',
-            'location_id' => 'required|exists:locations,id',
-            'date' => 'required|date',
-            'time_slot' => 'required|string'
-        ]);
+{
+    $request->validate([
+        'cbnumber' => 'required|string|max:255',
+        'sport_id' => 'required|exists:sports,id',
+        'equipment_id' => 'required|exists:equipment,id',
+        'location_id' => 'required|exists:locations,id',
+        'date' => 'required|date',
+        'time_slot' => 'required|string'
+    ]);
 
-        // Check if the time slot is already booked at the SAME LOCATION and DATE for the specified EQUIPMENT
-        $isBooked = Booking::where('time_slot', $request->time_slot)
-                           ->where('location_id', $request->location_id)
-                           ->where('equipment_id', $request->equipment_id)  // Check for specific equipment
-                           ->where('date', $request->date)  // Ensure to check against the specific date
-                           ->exists();
-
-        if ($isBooked) {
-            return redirect()->back()
-                ->withErrors(['time_slot' => 'This equipment is already booked for the selected time slot at this location on the specified date. Please choose another.'])
-                ->withInput();
-        }
-
-        // Retrieve the user, sport, equipment, and location information
-        $user = Auth::user();
-        $sport = Sport::find($request->sport_id);
-        $equipment = Equipment::find($request->equipment_id);
-        $location = Location::find($request->location_id);
-
-        // Proceed to create the booking
-        Booking::create([
-            'user_id' => $user->id,
-            'user_name' => $user->name ?? $user->email, // Use name if available, otherwise email
-            'cbnumber' => $request->cbnumber,
-            'sport_id' => $sport->id,
-            'sport_name' => $sport->name,
-            'equipment_id' => $equipment->id,
-            'equipment_name' => $equipment->name,
-            'location_id' => $location->id,
-            'location_name' => $location->branch,
-            'date' => $request->date,
-            'time_slot' => $request->time_slot
-        ]);
-
-        // Redirect to a specified route with a success message
-        return redirect()->route('users.sports-page')->with('success', 'Booking created successfully.');
+    if (Booking::where('time_slot', $request->time_slot)
+                ->where('location_id', $request->location_id)
+                ->where('equipment_id', $request->equipment_id)
+                ->where('date', $request->date)
+                ->exists()) {
+        return redirect()->back()
+            ->withErrors(['time_slot' => 'This equipment is already booked for the selected time slot at this location on the specified date. Please choose another.'])
+            ->withInput();
     }
+
+    $user = Auth::user();
+    $sport = Sport::find($request->sport_id);
+    $equipment = Equipment::find($request->equipment_id);
+    $location = Location::find($request->location_id);
+
+    if (!$location) {
+        return back()->withErrors(['location_id' => 'Invalid location selected.'])->withInput();
+    }
+
+    Booking::create([
+        'user_id' => $user->id,
+        'user_name' => $user->name ?? $user->email,
+        'cbnumber' => $request->cbnumber,
+        'sport_id' => $sport->id,
+        'sport_name' => $sport->name,
+        'equipment_id' => $equipment->id,
+        'equipment_name' => $equipment->name,
+        'location_id' => $location->id,
+        'location_name' => $location->branch,
+        'date' => $request->date,
+        'time_slot' => $request->time_slot
+    ]);
+
+    return redirect()->route('users.sports-page')->with('success', 'Booking created successfully.');
+}
+
 
 
 

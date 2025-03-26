@@ -105,7 +105,7 @@
                                     <form method="POST" action="{{ route('emails.destroy', $email->id) }}">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="text-white bg-red-500 hover:bg-red-600 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-3 py-2 text-center inline-flex items-center mr-2">
+                                        <button type="submit" onclick="return confirm('Do you really want to delete this email?');" class="text-white bg-red-500 hover:bg-red-600 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-3 py-2 text-center inline-flex items-center mr-2">
                                             Delete
                                         </button>
                                     </form>
@@ -167,7 +167,11 @@
     </footer>
 
 
-
+    <script>
+        function confirmDeletion() {
+            return confirm('Do you really want to delete this email?');
+        }
+    </script>
 
 </body>
 </html>
